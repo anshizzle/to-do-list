@@ -1,0 +1,25 @@
+
+<h3> Tasks </h3>
+<hr>
+<div>
+  <% @tasks.each do |task| %>
+    <div>
+      <%= task.title %> - <%= task.description %> |
+      <% if task.completed? %>
+        Completed On <%= task.completed %>
+      <% else %>
+        <%= form_with url: completed_task_path(task), html: { style: 'display: inline' } do |form| %>
+          <%= form.submit 'Complete' %>
+        <% end %>
+      <% end %>
+      |
+      <%= link_to 'Edit', edit_task_path(task) %> 
+      |
+      <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </div>
+  <% end %>
+</div>
+
+<hr>
+
+<%= link_to "New Task", new_task_path %>
